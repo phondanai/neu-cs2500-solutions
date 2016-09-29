@@ -1,10 +1,28 @@
 #lang racket
 
-(define (letter-grade num-score)
-    (cond [(<= 0 num-score 39) "F"]
-          [(<= 40 num-score 49) "D"]
-          [(<= 50 num-score 69) "C"]
-          [(<= 70 num-score 80) "B"]
-          [(>= 80 num-score 100) "A"]))
+(require test-engine/racket-tests)
 
-(letter-grade 30)
+;; ===============
+;; Tests
+
+(check-expect (letter-grade 0) "F")
+(check-expect (letter-grade 50) "C")
+(check-expect (letter-grade 43) "D")
+(check-expect (letter-grade 100) "A")
+(check-expect (letter-grade 80) "B")
+
+#;(define (letter-grade 100) "A") ; stub
+
+;; ===============
+;; Number -> String
+;; consume score and determine
+;; what grade student will have
+(define (letter-grade num-score)
+    (cond [(<= num-score 39) "F"]
+          [(<= num-score 49) "D"]
+          [(<= num-score 69) "C"]
+          [(<= num-score 80) "B"]
+          [(> num-score 80) "A"]))
+
+(test)
+
